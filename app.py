@@ -1,23 +1,22 @@
-
-
- 
-
-
-
 from flask import Flask, jsonify, request, Response
 from flask_pymongo import PyMongo
 from bson import json_util
 from bson.objectid import ObjectId
 from pymongo import MongoClient
+from os import environ
+
+SECRET_KEY = environ.get('SECRET_KEY')
+MONGO_URI = environ.get('MONGO_URI')
 
 
 from werkzeug.security import generate_password_hash, check_password_hash
 
 app = Flask(__name__)
 
-app.secret_key = 'Faymekk'
+app.secret_key = SECRET_KEY
 
-mongo = MongoClient("mongodb+srv://Faymekk:Faymekk@flaskapi.zimtu.mongodb.net/myFirstDatabase?retryWrites=true&w=majority", ssl_cert_reqs="CERT_NONE")
+
+mongo = MongoClient(MONGO_URI, ssl_cert_reqs="CERT_NONE")
 
 
 
